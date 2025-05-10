@@ -1,0 +1,11 @@
+; Base domain (non-www)
+@      3600 IN A     84.16.66.164
+@      3600 IN AAAA  2001:1600:0:aaaa::2:14
+@      3600 IN TXT   "1|latencylab.ch"
+@      3600 IN TXT   "p|https"
+
+; WWW variant
+www    3600 IN A     84.16.66.164
+www    3600 IN AAAA  2001:1600:0:aaaa::2:14
+www    3600 IN TXT   "1|latencylab.ch"
+www    3600 IN TXT   "p|https"

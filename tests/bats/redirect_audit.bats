@@ -9,8 +9,8 @@ load 'test_helper/bats-assert/load'
   failures=0
 
   domains=(
-    # latencylab.ch latencylab.co latencylab.net latencylab.org latencylab.is
-    shaqwave.ch # shaqwave.co shaqwave.com shaqwave.dev shaqwave.net shaqwave.org
+    latencylab.ch latencylab.co latencylab.net latencylab.org latencylab.is
+    shaqwave.ch shaqwave.co shaqwave.com shaqwave.dev shaqwave.net shaqwave.org shaqwave.tech
   )
 
   for domain in "${domains[@]}"; do
