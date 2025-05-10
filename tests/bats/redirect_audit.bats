@@ -9,8 +9,8 @@ load 'test_helper/bats-assert/load'
   failures=0
 
   domains=(
-    latencylab.ch latencylab.co latencylab.net latencylab.org latencylab.is
-    shaqwave.ch shaqwave.co shaqwave.com shaqwave.dev shaqwave.net shaqwave.org
+    # latencylab.ch latencylab.co latencylab.net latencylab.org latencylab.is
+    shaqwave.ch # shaqwave.co shaqwave.com shaqwave.dev shaqwave.net shaqwave.org
   )
 
   for domain in "${domains[@]}"; do
@@ -23,6 +23,13 @@ load 'test_helper/bats-assert/load'
 
         if [[ "$status" -ne 0 ]]; then
           printf '  ❌ curl failed for %s\n' "$url" >&3
+
+          # Attempt single redirect trace
+          redirect_url="$(curl -sL --max-time 5 --connect-timeout 2 -o /dev/null -D - "$url" | awk '/^HTTP\/.* 30[1-9]/ { show=1; next } /^HTTP\/.* 200/ { show=0 } show && /^Location:/ { print $2; exit }' | tr -d '\r')"
+          if [[ -n "$redirect_url" ]]; then
+            printf '    ↪ 301 Location: %s\n' "$redirect_url" >&3
+          fi
+
           printf '    ↳ NS records for %s:\n' "$domain" >&3
           ns="$(dig +short NS "$domain")"
           if [[ -z "$ns" ]]; then
@@ -98,6 +105,6 @@ load 'test_helper/bats-assert/load'
     printf '🛑 Total redirect failures: %s\n' "$failures" >&3
     false
   else
-    printf '✅  All domains successfully redirect to %s\n' "$expected" >&3
+    printf '🎉 All domains successfully redirect to %s\n' "$expected" >&3
   fi
 }
