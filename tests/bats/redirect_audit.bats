@@ -19,10 +19,17 @@ load 'test_helper/bats-assert/load'
         fqdn="${prefix}${domain}"
         url="${protocol}://${fqdn}"
 
+        # ✏️ Replace: run curl ...
         run curl -Ls --max-time 5 --connect-timeout 2 --fail -o /dev/null -w "%{http_code}|%{url_effective}" "$url"
 
-        if [[ "$status" -ne 0 ]]; then
+        # ✅ Added: Shadow curl output and status immediately
+        curl_status="${status}"
+        curl_out="${output}"
+
+        if [[ "$curl_status" -ne 0 ]]; then
           printf '  ❌ curl failed for %s\n' "$url" >&3
+          # ✅ Added: Show raw curl output
+          printf '    ⚠️ curl output: %s\n' "$curl_out" >&3
 
           # Attempt single redirect trace
           redirect_url="$(curl -sL --max-time 5 --connect-timeout 2 -o /dev/null -D - "$url" | awk '/^HTTP\/.* 30[1-9]/ { show=1; next } /^HTTP\/.* 200/ { show=0 } show && /^Location:/ { print $2; exit }' | tr -d '\r')"
@@ -85,8 +92,9 @@ load 'test_helper/bats-assert/load'
           continue
         fi
 
-        http_code="${output%%|*}"
-        final_url="${output#*|}"
+        # 🛠 Modified: Use curl_out instead of output
+        http_code="${curl_out%%|*}"
+        final_url="${curl_out#*|}"
         normalized="${final_url%/}"
 
         if [[ "$normalized" != "$expected_base" ]]; then
