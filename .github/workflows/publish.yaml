@@ -1,0 +1,37 @@
+name: Publish Helm Chart
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'helm-charts/**'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.13.3
+
+      - name: Package Helm chart
+        run: |
+          helm package helm-charts/latencylab-core --destination .github/pages
+
+      - name: Generate index.yaml
+        run: |
+          helm repo index .github/pages --url https://latencylab.github.io/latencylab.is
+
+      - name: Publish to GitHub Pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .github/pages
+          publish_branch: gh-pages

@@ -1,0 +1,65 @@
+# Default values for latencylab-core Helm chart.
+
+# 🌐 Domain settings
+domain:
+  apex: latencylab.is
+  redirectTarget: https://latencylab.ch
+  registry: cr.latencylab.is
+
+# 🔐 TLS issuer
+certManager:
+  enabled: true
+  installCRDs: true
+  clusterIssuer: letsencrypt-static
+  email: admin@latencylab.is
+  privateKeySecretName: letsencrypt-static-key
+  acmeDNS:
+    host: https://acme-dns.local  # doesn't matter; unused
+    enabled: true
+    secretName: acme-dns-credentials
+    secretKey: latencylab.is
+    fullDomain: _acme-challenge.latencylab.is
+    subDomain: latencylab.is
+    username: YOUR-ACME-DNS-USERNAME
+    password: YOUR-ACME-DNS-PASSWORD
+
+# 🧰 Registry configuration
+registry:
+  image: registry:2
+  storage:
+    size: 5Gi
+    class: csi-cinder-sc-retain
+
+# ⚙️ Redirect settings
+redirect:
+  enabled: true
+  responseCode: 301
+  hosts:
+    - latencylab.is
+    - www.latencylab.is
+  target: latencylab.ch
+  tlsSecretName: latencylab-tls
+
+# 🧪 Monitoring (external to chart but for reference)
+monitoring:
+  enabled: false  # managed via CI or external cron, not installed by this chart
+
+# 🛠 Ingress
+ingress:
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/permanent-redirect: https://latencylab.ch$request_uri
+  enabled: true
+  parentIngressClass:
+    enabled: false
+  controller:
+    replicaCount: 1
+    ingressClassResource:
+      name: nginx
+      enabled: true
+      default: false
+    service:
+      type: LoadBalancer
+      loadBalancerIPFile: latencylab-ip.txt
+    publishService:
+      enabled: true

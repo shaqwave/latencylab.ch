@@ -1,0 +1,35 @@
+apiVersion: v2
+name: latencylab-core
+description: Core Helm chart for latencylab.is infrastructure
+
+# Chart version follows SemVer
+version: 0.1.0
+
+# Compatible with Helm 3+
+appVersion: "1.0"
+type: application
+
+keywords:
+  - latencylab
+  - redirector
+  - container-registry
+  - cert-manager
+  - ingress
+
+maintainers:
+  - name: latencylab
+    email: ops@latencylab.is
+
+home: https://latencylab.is/
+sources:
+  - https://github.com/latencylab/latencylab.is
+
+dependencies:
+  - name: ingress-nginx
+    version: "4.10.0"
+    repository: "https://kubernetes.github.io/ingress-nginx"
+    alias: ingress
+  - name: cert-manager
+    version: "v1.17.2"
+    repository: https://charts.jetstack.io
+    condition: certManager.enabled

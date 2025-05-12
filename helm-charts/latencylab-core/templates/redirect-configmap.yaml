@@ -1,0 +1,13 @@
+{{- if .Values.redirect.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-redirect-conf
+  namespace: {{ .Release.Namespace }}
+data:
+  default.conf: |
+    server {
+      listen 80;
+      return {{ .Values.redirect.responseCode }} https://{{ .Values.redirect.target }}$request_uri;
+    }
+  {{- end }}

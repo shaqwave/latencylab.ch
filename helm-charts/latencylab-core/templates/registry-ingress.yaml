@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: registry-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.certManager.clusterIssuer }}
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  tls:
+    - hosts:
+        - {{ .Values.domain.registry }}
+      secretName: {{ .Values.domain.registry }}-tls
+  rules:
+      - host: {{ .Values.domain.registry }}
+        http:
+          paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: registry
+                  port:
+                    number: 5000

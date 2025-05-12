@@ -1,0 +1,16 @@
+{{- if .Values.registry.storage }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: registry-pvc
+  labels:
+    app.kubernetes.io/name: registry
+    app.kubernetes.io/component: storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.registry.storage.size | quote }}
+  storageClassName: {{ .Values.registry.storage.class | quote }}
+{{- end }}
