@@ -76,11 +76,11 @@ function combine_chain() {
 }
 
 function push_to_k8s() {
-  log_info "Updating k8s secrets latencylab-is-tls and cr.latencylab.is.tls"
+  log_info "Updating k8s secrets latencylab-is-tls and cr-latencylab-is-tls"
   local fullchain="$CERTBOT_CONFIG_DIR/live/${DOMAINS[0]}/fullchain.pem"
   local privkey="$CERTBOT_CONFIG_DIR/live/${DOMAINS[0]}/privkey.pem"
 
-  for name in latencylab-is-tls cr.latencylab.is.tls; do
+  for name in latencylab-is-tls cr-latencylab-is-tls; do
     kubectl -n latencylab-is create secret tls "${name}" \
       --cert="${fullchain}" \
       --key="${privkey}" \

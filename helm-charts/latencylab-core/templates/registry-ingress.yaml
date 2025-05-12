@@ -10,10 +10,10 @@ spec:
   ingressClassName: {{ .Values.registry.ingressClassName }}
   tls:
     - hosts:
-        - {{ .Values.domain.registry }}
-      secretName: {{ .Values.domain.registry }}-tls
+        - {{ .Values.registry.fqdn }}
+      secretName: {{ .Values.registry.secretName }}-tls
   rules:
-      - host: {{ .Values.domain.registry }}
+      - host: {{ .Values.registry.fqdn }}
         http:
           paths:
             - path: /

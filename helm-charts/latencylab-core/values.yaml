@@ -1,13 +1,10 @@
 # Default values for latencylab-core Helm chart.
 
-# 🌐 Domain settings
-domain:
-  apex: latencylab.is
-  redirectTarget: https://latencylab.ch
-  registry: cr.latencylab.is
 
 # 🧰 Registry configuration
 registry:
+  fqdn: cr.latencylab.is.
+  secretName: cr-latencylab-is
   enabled: false
   image: registry:2
   storage:
