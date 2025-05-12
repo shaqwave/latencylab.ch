@@ -20,14 +20,14 @@ load 'test_helper/bats-assert/load'
         url="${protocol}://${fqdn}"
 
         # ✏️ Replace: run curl ...
-        run curl -Ls --max-time 5 --connect-timeout 2 --fail -o /dev/null -w "%{http_code}|%{url_effective}" "$url"
+        run curl -Ls --max-time 10 --connect-timeout 5 --fail -o /dev/null -w "%{http_code}|%{url_effective}" "$url"
 
         # ✅ Added: Shadow curl output and status immediately
         curl_status="${status}"
         curl_out="${output}"
 
         if [[ "$curl_status" -ne 0 ]]; then
-          printf '  ❌ curl failed for %s\n' "$url" >&3
+          printf '  ❌ curl failed for %s status=%d\n' "$url" "$curl_status">&3
           # ✅ Added: Show raw curl output
           printf '    ⚠️ curl output: %s\n' "$curl_out" >&3
 
