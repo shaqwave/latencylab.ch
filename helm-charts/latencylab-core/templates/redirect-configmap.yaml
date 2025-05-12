@@ -7,7 +7,18 @@ metadata:
 data:
   default.conf: |
     server {
-      listen 80;
+      listen 443 ssl;
+      server_name latencylab.is www.latencylab.is;
+  
+      ssl_certificate     /etc/nginx/tls/tls.crt;
+      ssl_certificate_key /etc/nginx/tls/tls.key;
+    
       return {{ .Values.redirect.responseCode }} https://{{ .Values.redirect.target }}$request_uri;
     }
-  {{- end }}
+  
+    server {
+      listen 80;
+      server_name latencylab.is www.latencylab.is;
+      return {{ .Values.redirect.responseCode }} https://{{ .Values.redirect.target }}$request_uri;
+    }
+{{- end }}

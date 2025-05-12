@@ -22,7 +22,7 @@ function main() {
 
   _ensure_helm_available
   _ensure_kubeconfig_valid
-  _maybe_install_crds "${commit_flag}"
+  # _maybe_install_crds "${commit_flag}"
   _run_deploy "${commit_flag}"
 }
 

@@ -20,8 +20,17 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /etc/nginx/conf.d
+            - name: tls
+              mountPath: /etc/nginx/tls
+              readOnly: true
+          ports:
+            - containerPort: 80
+            - containerPort: 443
       volumes:
         - name: config
           configMap:
             name: nginx-redirect-conf
-  {{- end }}
+        - name: tls
+          secret:
+            secretName: {{ .Values.redirect.tlsSecretName }}
+{{- end }}

@@ -1,0 +1,19 @@
+{{- if .Values.registry.enabled }}
+  {{- if and
+    (hasKey .Values.registry "parentIngressClass")
+    (hasKey .Values.registry.parentIngressClass "enabled")
+    (not (eq .Values.registry.parentIngressClass.enabled nil))
+    .Values.registry.parentIngressClass.enabled
+  }}
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: {{ .Values.registry.ingressClassResource.name | quote }}
+spec:
+  controller: k8s.io/ingress-nginx
+  parameters:
+    apiGroup: k8s.nginx.org
+    kind: IngressClassParams
+    name: {{ .Values.registry.ingressClassResource.name | quote }}
+  {{- end }}
+{{- end }}

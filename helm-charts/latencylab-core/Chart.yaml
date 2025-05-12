@@ -13,7 +13,6 @@ keywords:
   - latencylab
   - redirector
   - container-registry
-  - cert-manager
   - ingress
 
 maintainers:
@@ -29,7 +28,3 @@ dependencies:
     version: "4.10.0"
     repository: "https://kubernetes.github.io/ingress-nginx"
     alias: ingress
-  - name: cert-manager
-    version: "v1.17.2"
-    repository: https://charts.jetstack.io
-    condition: certManager.enabled

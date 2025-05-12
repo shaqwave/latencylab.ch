@@ -6,29 +6,20 @@ domain:
   redirectTarget: https://latencylab.ch
   registry: cr.latencylab.is
 
-# 🔐 TLS issuer
-certManager:
-  enabled: true
-  installCRDs: true
-  clusterIssuer: letsencrypt-static
-  email: admin@latencylab.is
-  privateKeySecretName: letsencrypt-static-key
-  acmeDNS:
-    host: https://acme-dns.local  # doesn't matter; unused
-    enabled: true
-    secretName: acme-dns-credentials
-    secretKey: latencylab.is
-    fullDomain: _acme-challenge.latencylab.is
-    subDomain: latencylab.is
-    username: YOUR-ACME-DNS-USERNAME
-    password: YOUR-ACME-DNS-PASSWORD
-
 # 🧰 Registry configuration
 registry:
+  enabled: false
   image: registry:2
   storage:
     size: 5Gi
     class: csi-cinder-sc-retain
+  ingressClassName: nginx-core
+  parentIngressClass:
+    enabled: true
+  ingressClassResource:
+    name: nginx-core
+    enabled: true
+    default: false
 
 # ⚙️ Redirect settings
 redirect:
@@ -38,26 +29,29 @@ redirect:
     - latencylab.is
     - www.latencylab.is
   target: latencylab.ch
-  tlsSecretName: latencylab-tls
+  tlsSecretName: latencylab-is-tls
+  ingressClassName: nginx-redirect
+  parentIngressClass:
+    enabled: true
+  ingressClassResource:
+    name: nginx-redirect
+    enabled: true
+    default: false
+    annotations:
+      nginx.ingress.kubernetes.io/permanent-redirect: https://latencylab.ch$request_uri
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/use-regex: "true"
 
 # 🧪 Monitoring (external to chart but for reference)
 monitoring:
   enabled: false  # managed via CI or external cron, not installed by this chart
 
-# 🛠 Ingress
+# 🛠 Ingress controller config (global)
 ingress:
-  className: nginx
-  annotations:
-    nginx.ingress.kubernetes.io/permanent-redirect: https://latencylab.ch$request_uri
   enabled: true
-  parentIngressClass:
-    enabled: false
   controller:
     replicaCount: 1
-    ingressClassResource:
-      name: nginx
-      enabled: true
-      default: false
     service:
       type: LoadBalancer
       loadBalancerIPFile: latencylab-ip.txt
