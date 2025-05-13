@@ -3,20 +3,19 @@
 
 # 🧰 Registry configuration
 registry:
-  fqdn: cr.latencylab.is.
-  secretName: cr-latencylab-is
-  enabled: false
+  enabled: true
+  hostname: cr.latencylab.is
+  tlsSecretName: cr-latencylab-is
   image: registry:2
+  auth:
+    secretName: registry-auth
+  service:
+    host: registry.latencylab-is.svc.cluster.local
+    port: 5000
+  dnsResolver: 10.96.0.10
   storage:
-    size: 5Gi
+    size: 10Gi
     class: csi-cinder-sc-retain
-  ingressClassName: nginx-core
-  parentIngressClass:
-    enabled: true
-  ingressClassResource:
-    name: nginx-core
-    enabled: true
-    default: false
 
 # ⚙️ Redirect settings
 redirect:
@@ -27,18 +26,6 @@ redirect:
     - www.latencylab.is
   target: latencylab.ch
   tlsSecretName: latencylab-is-tls
-  ingressClassName: nginx-redirect
-  parentIngressClass:
-    enabled: true
-  ingressClassResource:
-    name: nginx-redirect
-    enabled: true
-    default: false
-    annotations:
-      nginx.ingress.kubernetes.io/permanent-redirect: https://latencylab.ch$request_uri
-      nginx.ingress.kubernetes.io/ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/use-regex: "true"
 
 # 🧪 Monitoring (external to chart but for reference)
 monitoring:

@@ -18,11 +18,27 @@ spec:
           image: {{ .Values.registry.image }}
           ports:
             - containerPort: 5000
+          env:
+            - name: REGISTRY_AUTH
+              value: "htpasswd"
+            - name: REGISTRY_AUTH_HTPASSWD_REALM
+              value: "Registry Realm"
+            - name: REGISTRY_AUTH_HTPASSWD_PATH
+              value: "/auth/auth.htpasswd"
           volumeMounts:
             - name: registry-storage
               mountPath: /var/lib/registry
+            - name: {{ .Values.registry.auth.secretName }}
+              mountPath: /auth
+              readOnly: true
       volumes:
         - name: registry-storage
           persistentVolumeClaim:
             claimName: registry-pvc
+        - name: {{ .Values.registry.auth.secretName }}
+          secret:
+            secretName: {{ .Values.registry.auth.secretName }}
+            items:
+              - key: auth.htpasswd
+                path: auth.htpasswd
 {{- end }}

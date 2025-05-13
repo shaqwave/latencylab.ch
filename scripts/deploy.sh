@@ -17,11 +17,19 @@ readonly CHART_PATH='./helm-charts/latencylab-core'
 readonly KUBECONFIG_PATH="${KUBECONFIG:-$HOME/.kube/config}"
 readonly LOG_FILE="./.results/helm-deploy.$(date +%s).log"
 
+readonly CERT_DIR="$HOME/.ssh/latencylab.is"
+readonly CERT_FILE="${CERT_DIR}/tls.pem"
+readonly CERTBOT_CONFIG_DIR="${CERT_DIR}/certbot-config"
+readonly CERTBOT_WORK_DIR="${CERT_DIR}/certbot-work"
+readonly DOMAINS=(latencylab.is www.latencylab.is cr.latencylab.is)
+
 function main() {
   local -r commit_flag="${1:-}"
 
   _ensure_helm_available
   _ensure_kubeconfig_valid
+  _ensure_tls_cert
+  _ensure_registry_auth
   # _maybe_install_crds "${commit_flag}"
   _run_deploy "${commit_flag}"
 }
@@ -38,6 +46,43 @@ function _ensure_kubeconfig_valid() {
     printf '❌ kubeconfig not found at: %s\n' "${KUBECONFIG_PATH}" >&2
     exit 1
   }
+}
+
+function _ensure_registry_auth() {
+  local -r SECRET_NAME="registry-auth"
+
+  if [[ ! -f "${HOME}/.ssh/latencylab.is/auth.htpasswd" ]]; then
+    echo "🛑 auth.htpasswd file not found: ${HOME}/.ssh/latencylab.is/auth.htpasswd"
+    exit 1
+  fi
+
+  if ! kubectl get secret "${SECRET_NAME}" -n "${NAMESPACE}" >/dev/null 2>&1; then
+    echo "ℹ️  Creating secret '${SECRET_NAME}' in namespace '${NAMESPACE}'..."
+    kubectl create secret generic "${SECRET_NAME}" \
+      --from-file=auth.htpasswd="${HOME}/.ssh/latencylab.is/auth.htpasswd" \
+      --namespace "${NAMESPACE}"
+  else
+    echo "✅ Secret '${SECRET_NAME}' already exists in namespace '${NAMESPACE}'"
+  fi
+}
+
+function _ensure_tls_cert() {
+  echo "ℹ️  Updating k8s TLS secrets 'latencylab-is-tls' and 'cr-latencylab-is-tls'..."
+  local -r fullchain="${CERTBOT_CONFIG_DIR}/live/${DOMAINS[0]}/fullchain.pem"
+  local -r privkey="${CERTBOT_CONFIG_DIR}/live/${DOMAINS[0]}/privkey.pem"
+  local secret_name
+  for secret_name in latencylab-is-tls cr-latencylab-is-tls; do
+
+    if ! kubectl get secret "${secret_name}" -n "${NAMESPACE}" >/dev/null 2>&1; then
+      echo "ℹ️  Creating TLS secret '${secret_name}' in namespace '${NAMESPACE}'..."
+      kubectl -n latencylab-is create secret tls "${secret_name}" \
+        --cert="${fullchain}" \
+        --key="${privkey}" \
+        --dry-run=client -o yaml | kubectl apply -f -
+    else
+      echo "✅ TLS secret '${secret_name}' already exists in namespace '${NAMESPACE}'"
+    fi
+  done
 }
 
 function _maybe_install_crds() {

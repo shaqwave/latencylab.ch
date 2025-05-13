@@ -1,0 +1,71 @@
+Objet : Problème de sécurité : Résolveur DNS ouvert sur l’IP publique du cluster Kubernetes
+
+RE: Support Code: 629831
+    Infomaniak Account ID: 112941
+    Project Name: PCK-NHL6MX4
+
+Bonjour,
+
+Je souhaite signaler un problème potentiel de sécurité concernant mon environnement Kubernetes hébergé sur votre plateforme.
+
+Après un scan de routine des services exposés publiquement, j’ai constaté que le port UDP 53 est ouvert sur l’adresse IP publique assignée à mon cluster Kubernetes (cr.latencylab.is). Après vérification, cette IP fonctionne comme un résolveur DNS ouvert accessible depuis l’extérieur.
+
+Vous pouvez reproduire ce comportement avec la commande suivante :
+dig @<mon-ip-publique> google.com
+
+Cette configuration présente un risque important, notamment :
+- Exploitation dans des attaques DDoS par amplification DNS
+- Génération de trafic non sollicité et abus
+- Risque de blacklist et atteinte à la réputation de l’IP
+
+À ma connaissance, je n’ai pas déployé de service exposant explicitement un service DNS sur ce port. Il est possible que cela provienne de la configuration par défaut de la plateforme ou d’un composant d’infrastructure sous-jacent.
+
+Demande :
+- Merci de confirmer la source de ce service DNS.
+- Désactiver ou filtrer l’accès public au port 53 sauf demande explicite.
+- Me faire savoir si je dois effectuer une action particulière côté configuration Kubernetes.
+
+Merci par avance pour votre aide.
+
+Cordialement,
+James Paul Charlton
+
+-----------------------------------
+
+Subject: Security Issue: Open DNS Resolver on Public IP for Kubernetes Cluster
+
+RE: Support Code: 629831
+    Infomaniak Account ID: 112941
+    Project Name: PCK-NHL6MX4
+
+Dear Infomaniak Support,
+
+I’m writing to report a potential security issue with my Kubernetes environment hosted under your platform.
+
+After a routine scan of my public-facing services, I observed that UDP port 53 is open on the external IP assigned to my Kubernetes cluster (cr.latencylab.is). Upon further testing, it appears that this IP is running an open DNS resolver accessible from the public internet.
+
+You can verify this with the following command:
+
+dig @cr.latencylab.is google.com
+
+or,
+
+dig @83.228.203.236 google.com
+
+This configuration introduces a serious risk, as it can:
+	•	Be exploited in DNS amplification DDoS attacks
+	•	Lead to unwanted traffic and abuse
+	•	Cause reputational harm and blacklisting of the IP
+
+To the best of my knowledge, I have not deployed any service explicitly exposing DNS on port 53. This may originate from the underlying platform or default configuration.
+
+Request:
+	•	Please confirm the source of this DNS service.
+	•	Disable or firewall port 53 from public access unless explicitly requested.
+	•	Let me know if I need to make any changes in my Kubernetes settings to resolve this on my side.
+
+Thanks for your prompt attention to this issue.
+
+Best regards,
+James Paul Charlton
+
