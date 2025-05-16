@@ -1,0 +1,120 @@
+Rank,Entity,Type,Market Cap (USD),Estimated Annual Sales to/from TSMC (USD)
+1,ASML Holding N.V.,Upstream,$400 billion,~$5 billion
+2,Applied Materials, Inc.,Upstream,$200 billion,~$3 billion
+3,Lam Research Corporation,Upstream,$150 billion,~$2.5 billion
+4,KLA Corporation,Upstream,$100 billion,~$2 billion
+5,Tokyo Electron Limited,Upstream,$90 billion,~$1.5 billion
+6,Apple Inc.,Downstream,$3.5 trillion,~$40 billion
+7,NVIDIA Corporation,Downstream,$2.5 trillion,~$15 billion
+8,AMD (Advanced Micro Devices, Inc.),Downstream,$300 billion,~$10 billion
+9,Qualcomm Incorporated,Downstream,$200 billion,~$8 billion
+10,Broadcom Inc.,Downstream,$700 billion,~$7 billion
+11,MediaTek Inc.,Downstream,$50 billion,~$5 billion
+12,NXP Semiconductors N.V.,Downstream,$70 billion,~$4 billion
+13,Sony Corporation,Downstream,$120 billion,~$3.5 billion
+14,Huawei Technologies Co., Ltd.,Downstream,~$100 billion,~$3 billion
+15,Samsung Electronics Co., Ltd.,Downstream,$400 billion,~$2.5 billion
+16,TSMC (Taiwan Semiconductor Manufacturing Company Limited),Self,$1.010 trillion,N/A
+17,Total Market Cap (Upstream + Downstream + TSMC),Aggregate,$9.320 trillion,N/A
+18,Total Economic Exchange (Absolute Values),Aggregate,N/A,~$112 billion
+
+
+Rank,Entity,Type,Market Cap (USD),Estimated Annual Sales to/from Samsung (USD)
+1,ASML Holding N.V.,Upstream,$400 billion,~$5 billion
+2,Applied Materials, Inc.,Upstream,$200 billion,~$3 billion
+3,Lam Research Corporation,Upstream,$150 billion,~$2.5 billion
+4,KLA Corporation,Upstream,$100 billion,~$2 billion
+5,Tokyo Electron Limited,Upstream,$90 billion,~$1.5 billion
+6,Apple Inc.,Downstream,$3.5 trillion,~$30 billion
+7,Samsung Electronics (Consumer Electronics Division),Downstream,$400 billion,~$20 billion
+8,Qualcomm Incorporated,Downstream,$200 billion,~$8 billion
+9,NVIDIA Corporation,Downstream,$2.5 trillion,~$10 billion
+10,AMD,Downstream,$300 billion,~$7 billion
+11,MediaTek Inc.,Downstream,$50 billion,~$5 billion
+12,Broadcom Inc.,Downstream,$700 billion,~$6 billion
+13,Sony Corporation,Downstream,$120 billion,~$4 billion
+14,Huawei Technologies Co., Ltd.,Downstream,~$100 billion,~$3 billion
+15,Xiaomi Corporation,Downstream,~$50 billion,~$3 billion
+16,Total Market Cap (Upstream + Downstream),Aggregate,$8.360 trillion,N/A
+17,Total Economic Exchange (Absolute Values),Aggregate,N/A,~$110.5 billion
+
+
+
+Rank,Entity,Type,Market Cap (USD),Estimated Annual Sales to/from GlobalFoundries (USD)
+1,ASML Holding N.V.,Upstream,$400 billion,~$3 billion
+2,Applied Materials, Inc.,Upstream,$200 billion,~$2 billion
+3,Lam Research Corporation,Upstream,$150 billion,~$1.5 billion
+4,KLA Corporation,Upstream,$100 billion,~$1 billion
+5,Tokyo Electron Limited,Upstream,$90 billion,~$1 billion
+6,AMD,Downstream,$300 billion,~$5 billion
+7,Qualcomm Incorporated,Downstream,$200 billion,~$4 billion
+8,NVIDIA Corporation,Downstream,$2.5 trillion,~$3 billion
+9,MediaTek Inc.,Downstream,$50 billion,~$2 billion
+10,Broadcom Inc.,Downstream,$700 billion,~$2 billion
+11,NXP Semiconductors N.V.,Downstream,$70 billion,~$2 billion
+12,Sony Corporation,Downstream,$120 billion,~$1.5 billion
+13,Huawei Technologies Co., Ltd.,Downstream,~$100 billion,~$1 billion
+14,Xiaomi Corporation,Downstream,~$50 billion,~$1 billion
+15,Texas Instruments Incorporated,Downstream,~$150 billion,~$1.5 billion
+16,Total Market Cap (Upstream + Downstream),Aggregate,$5.010 trillion,N/A
+17,Total Economic Exchange (Absolute Values),Aggregate,N/A,~$31.5 billion
+
+
+Rank,Entity,Type,Market Cap (USD),Estimated Annual Sales to/from UMC (USD)
+1,ASML Holding N.V.,Upstream,$400 billion,~$2.5 billion
+2,Applied Materials, Inc.,Upstream,$200 billion,~$1.5 billion
+3,Lam Research Corporation,Upstream,$150 billion,~$1 billion
+4,KLA Corporation,Upstream,$100 billion,~$0.8 billion
+5,Tokyo Electron Limited,Upstream,$90 billion,~$0.7 billion
+6,MediaTek Inc.,Downstream,$50 billion,~$4 billion
+7,Qualcomm Incorporated,Downstream,$200 billion,~$3 billion
+8,NVIDIA Corporation,Downstream,$2.5 trillion,~$2 billion
+9,AMD,Downstream,$300 billion,~$2.5 billion
+10,Broadcom Inc.,Downstream,$700 billion,~$2 billion
+11,NXP Semiconductors N.V.,Downstream,$70 billion,~$1.5 billion
+12,Sony Corporation,Downstream,$120 billion,~$1 billion
+13,Huawei Technologies Co., Ltd.,Downstream,~$100 billion,~$1 billion
+14,Xiaomi Corporation,Downstream,~$50 billion,~$1 billion
+15,Texas Instruments Incorporated,Downstream,~$150 billion,~$1 billion
+16,Total Market Cap (Upstream + Downstream),Aggregate,$5.035 trillion,N/A
+17,Total Economic Exchange (Absolute Values),Aggregate,N/A,~$25 billion
+
+
+Rank,Entity,Type,Market Cap (USD),Estimated Annual Sales to/from SMIC (USD)
+1,ASML Holding N.V.,Upstream,$400 billion,~$2 billion
+2,Applied Materials, Inc.,Upstream,$200 billion,~$1.5 billion
+3,Lam Research Corporation,Upstream,$150 billion,~$1 billion
+4,KLA Corporation,Upstream,$100 billion,~$0.8 billion
+5,Tokyo Electron Limited,Upstream,$90 billion,~$0.7 billion
+6,Huawei Technologies Co., Ltd.,Downstream,~$100 billion,~$4 billion
+7,Xiaomi Corporation,Downstream,~$50 billion,~$3 billion
+8,Oppo,Downstream,~$30 billion,~$2 billion
+9,Vivo,Downstream,~$30 billion,~$2 billion
+10,MediaTek Inc.,Downstream,$50 billion,~$3 billion
+11,Qualcomm Incorporated,Downstream,$200 billion,~$2 billion
+12,NVIDIA Corporation,Downstream,$2.5 trillion,~$1.5 billion
+13,AMD,Downstream,$300 billion,~$1.5 billion
+14,Broadcom Inc.,Downstream,$700 billion,~$1 billion
+15,NXP Semiconductors N.V.,Downstream,$70 billion,~$1 billion
+16,Total Market Cap (Upstream + Downstream),Aggregate,$4.990 trillion,N/A
+17,Total Economic Exchange (Absolute Values),Aggregate,N/A,~$26.5 billion
+
+Rank,Entity,Type,Market Cap (USD),Estimated Annual Sales to/from Intel (USD)
+1,ASML Holding N.V.,Upstream,$400 billion,~$4 billion
+2,Applied Materials, Inc.,Upstream,$200 billion,~$3 billion
+3,Lam Research Corporation,Upstream,$150 billion,~$2.5 billion
+4,KLA Corporation,Upstream,$100 billion,~$2 billion
+5,Tokyo Electron Limited,Upstream,$90 billion,~$1.5 billion
+6,Dell Technologies Inc.,Downstream,~$50 billion,~$10 billion
+7,HP Inc.,Downstream,~$30 billion,~$8 billion
+8,Lenovo Group Limited,Downstream,~$20 billion,~$6 billion
+9,Acer Inc.,Downstream,~$5 billion,~$2 billion
+10,ASUS Tek Computer Inc.,Downstream,~$10 billion,~$3 billion
+11,Microsoft Corporation,Downstream,$3 trillion,~$15 billion
+12,Amazon.com, Inc.,Downstream,$2 trillion,~$12 billion
+13,Google LLC,Downstream,$2 trillion,~$10 billion
+14,Apple Inc.,Downstream,$3.5 trillion,~$20 billion
+15,Samsung Electronics Co., Ltd.,Downstream,$400 billion,~$5 billion
+16,Total Market Cap (Upstream + Downstream),Aggregate,$11.755 trillion,N/A
+17,Total Economic Exchange (Absolute Values),Aggregate,N/A,~$104 billion
+
