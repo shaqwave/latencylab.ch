@@ -1,0 +1,24 @@
+apiVersion: v1
+entries:
+  latencylab-core:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2025-06-24T21:07:58.934938552Z"
+    description: Core Helm chart for latencylab.is infrastructure
+    digest: 7e59dc27d09a4736a4a9125955369e3912a00653ea51403d5b4f62513cbee0f6
+    home: https://latencylab.is/
+    keywords:
+    - latencylab
+    - redirector
+    - container-registry
+    maintainers:
+    - email: contact@latencylab.is
+      name: latencylab
+    name: latencylab-core
+    sources:
+    - https://github.com/latencylab/latencylab.is
+    type: application
+    urls:
+    - https://latencylab.github.io/latencylab.is/latencylab-core-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-06-24T21:07:58.934422029Z"
