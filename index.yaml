@@ -3,9 +3,9 @@ entries:
   latencylab-core:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2025-06-24T21:07:58.934938552Z"
+    created: "2025-07-15T13:03:09.568285101Z"
     description: Core Helm chart for latencylab.is infrastructure
-    digest: 7e59dc27d09a4736a4a9125955369e3912a00653ea51403d5b4f62513cbee0f6
+    digest: 5e3f39eb10d7b499437db926f159b36ac265f1055404c6acd3bea29f8a9d3814
     home: https://latencylab.is/
     keywords:
     - latencylab
@@ -21,4 +21,4 @@ entries:
     urls:
     - https://latencylab.github.io/latencylab.is/latencylab-core-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-24T21:07:58.934422029Z"
+generated: "2025-07-15T13:03:09.567734949Z"
